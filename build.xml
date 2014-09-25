@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ATM" default="jar" basedir=".">
+    <description>
+        CSCI E-55 HW5
+    </description>
+	<!-- set properties -->
+	<property name="src" location="src"/>
+	<property name="tests" location="tests"/>
+	<property name="classes" location="classes"/>
+	<property name="jar" location="jar"/>
+	<property name="lib" location="lib"/>
+
+	<target name="clean" description="clean up" >
+		<echo> Cleaning... </echo>
+		<delete dir="${classes}"/>
+		<delete dir="${jar}"/>
+	</target>
+
+	<target name="compile" depends="clean" description="compile" >
+		<echo>Compiling.. </echo>
+		<mkdir dir="${classes}"/>
+		<!-- Compile the java code into classes folder -->
+		<javac destdir="${classes}" includeantruntime="false" classpath="${lib}/junit-4.11.jar" >
+		<!-- take the source from these directories.. place their compiled forms in ${classes} -->
+			<src path="${src}"/>
+			<src path="${tests}"/>
+		</javac>
+	</target>
+
+	<!-- Create executable jar file -->
+	<target name="jar" depends="compile" description="generate jar with classes" >
+		<echo>Creating executable .jar file</echo>
+		<jar jarfile="${jar}/hw5_executable.jar" basedir="${classes}" />
+	</target>
+	
+</project>

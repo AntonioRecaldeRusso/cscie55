@@ -1,0 +1,74 @@
+				***** CSCI E-55 FINAL PROJECT - BANK SYSTEM *****
+
+								--- OVERVIEW ---
+This App simulates the interaction between ATM Clients, an ATM Server, and a Bank Server.
+
+--- How it works:
+
+	1) Running the BankServer:
+	- The BankServer uses a "FACTORY PATTERN" to pass a BankFactoryImpl object remotely via the RMI Naming.rebind().
+	- This BankFactoryImpl object has a method called "getBank()" which returns a BankImpl object.
+	- BankImpl has two main tasks: a) Keeps track of the accounts registered with the bank. b) has methods that can be used in order to
+		interact with those accounts.
+	- The Account objects always stay within the BankImpl and are never passed to other classes. Only BankImpl can perform operation or
+		has access to the accounts
+	
+	2) Running the ATMServer:
+	- The ATMServer uses a "FACTORY PATTERN" to register a ATMFactoryImpl object via Naming.lookup(), and make it become accessible to clients.
+	- The ATMFactoryImpl has one method "getATM" just like in homework 5. It creates an instance of ATMImpl, and returns it.
+	- The ATMImpl object picks up a BankFactoryImpl object via Naming.lookup() in its constructor. It then obtains the BankImpl object via the getBank() method...
+		ATMImpl interacts -remotely- with BankImpl in order to perform transaction operations requested by a client. ATMImpl also notifies the client (after it
+		registers itself as an ATMListener) before and after the transaction takes place via a TransactionNotification object.
+	
+	3) Running the Client:
+	- In main(), the Client class creates an instance of itself, and starts its functional part with the .start() method.
+	- In its constructor, the client object picks up a ATMFactoryImpl remote object using Naming.lookup(). After, it obtains a reference to the remote ATMImpl via the getATM() method.
+		After, this object registers itself as an ATMListener, thus it becomes ready to receive calls to the receiveTransactionNotification() method remotely.
+		Next, it runs the test provided by the Final Project specifications.
+		Last, it unregisters itself as an ATMListener, and ends the execution of the program.
+		
+
+--- Files provided:
+
+	* 1 .jar file: (project.jar)	- Account.java
+									- AccountInfo.java
+									- ATM.java
+									- ATMFactory.java
+									- ATMFactoryImpl.java
+									- ATMInsufficientCashException.java
+									- ATMListener.java
+									- ATMServer.java
+									- Bank.java
+									- BankFactory.java
+									- BankFactoryImpl.java
+									- BankImpl.java
+									- BankServer.java
+									- Client.java
+									- IncorrectPINException.java
+									- InsufficientFundsException.java
+									- InsufficientPermissionsException.java
+									- Security.java
+									- TransactionNotification.java
+									- TransactionType.java
+									- Overview.txt
+									
+--- How to run the program:
+	- Extract the jar file (project.jar)
+	- compile the files. E.g. In the same folder as the files:		>javac *.java
+	- In the parent directory, run the "rmiregistry."	E.g.  		>rmiregistry
+	
+	- Then, first start the Bank server:
+	> cscie55.project.BankServer
+	
+	- Next, start the ATMServer:
+	> cscie55.project.ATMServer
+	
+	- Last, start the Client:
+	> cscie55.project.Client 
+		
+	
+	
+	
+	
+	
+	 

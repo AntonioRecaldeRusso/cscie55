@@ -1,0 +1,73 @@
+/**
+*	This is the Elevator simulation program as required by the homework
+*	specifications.
+*	This program uses a deterministic approach to create a basic simulation. It seeks to
+*	produce the desired output:
+*
+*	/////////////////////////////////////////////////
+*
+*		Currently 3 passengers onboard
+*   	Current Floor: 1
+*   
+*   	Stopping on floor 2
+*   	Currently 1 passengers onboard
+*  		Current Floor: 2
+*   
+*   	Stopping on floor 3
+*   	Currently 0 passengers onboard
+*   	Current Floor: 3
+*	
+*	//////////////////////////////////////////////////
+*	
+*
+*
+*	----------OVERVIEW-----------
+*
+*	This simulation reaches its solution through the following steps:
+*
+*	-	The elevator starts at floor 0.
+
+*	-	It is loaded with Passengers via boardPassenger(int floor) method, 
+*	using arbitrary values. The parameter floor is the intended destination of the passenger.
+*
+*	- 	The input parameter from boardPassenger gets stored in an array. The [0] index corresponds to the first floor.
+*	The value inside each index will increase as more people want to go to that floor. It decreases when they get off the elevator.
+*
+*	- 	After an Elevator object is created, its constructors sets the initial number of passengers and current floor to 0.
+*	This method is call inside of main(), and loaded with arbitrary values.
+*
+*	- 	The program uses a for loop to call move() and move the elevator from floor to floor, 
+*	changing directions when it reaches the top or bottom. Total 36 cycles.
+*
+*	- 	If the Elevator has requests for a particular floor in the destination_requests[] array, 
+*	the method move() calls stop() instead of incrementing current_floor number.
+*
+*	-	The stop() method calls the discharge passengers method, which unloads all passengers destined for the current floor.
+*	It then calls move() again in order to resume.
+*
+*	-	After the for loop cycles are exausted, the program stops.
+*		 
+*	
+*	------ASSUMPTIONS MADE IN THE DESIGN------
+*	
+*	- Number of floors is set to 7
+*	- All passengers are loaded from floor 1, before the elevator starts its motion.
+*	- Passenger destinations are arbitrary
+*	- The elevator capacity is set to 10 passengers, but this is not enforced.
+*
+*
+*	-----------CLASSES CREATED-------------
+*
+*	This program uses one java class: Elevator.class
+*
+*
+*	--------HOW TO EXECUTE THE PROGRAM---------
+*
+*	Run the program through command line arguments by executing Elevator.class
+*	
+*
+*	---- This program is a complete solution and has been tested. ----
+*/
+
+package cscie55.hw1;
+
